@@ -1,0 +1,25 @@
+#konga-deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: konga
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: konga
+  template:
+    metadata:
+      labels:
+        app: konga
+    spec:
+      containers:
+      - name: konga
+        image: pantsel/konga:latest
+        ports:
+        - containerPort: 1337
+        env:
+        - name: NODE_ENV
+          value: "production"
+        - name: TOKEN_SECRET
+          value: "e2aa0573b5702af25d4fc5d2b56f7a00373e4f3316fe85fc40993af765cf4d04"

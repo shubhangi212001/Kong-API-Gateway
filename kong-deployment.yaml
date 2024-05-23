@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kong
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: kong
+  template:
+    metadata:
+      labels:
+        app: kong
+    spec:
+      containers:
+      - name: kong
+        image: kong:3.6
+        imagePullPolicy: Always
+        env:
+          - name: KONG_DATABASE
+            value: "postgres"
+          - name: KONG_PG_HOST
+            value: "172.16.22.122"
+          - name: KONG_PG_PORT
+            value: "31005"
+          - name: KONG_PG_USER
+            value: "kong"
+          - name: KONG_PG_PASSWORD
+            value: "kong"
+          - name: KONG_PG_DATABASE
+            value: "kong"
+          - name: KONG_PG_SCHEMA
+            value: "public"
+          - name: KONG_DECLARATIVE_CONFIG
+            value: "./configmap.yaml"
+          - name: KONG_ADMIN_LISTEN
+            value: "0.0.0.0:8001, 0.0.0.0:8444 ssl"
+        ports:
+        - containerPort: 8000  # HTTP Proxy Port
+        - containerPort: 8443  # HTTPS Proxy Port
+        - containerPort: 8001  # Admin API Port
+        - containerPort: 8444  # Admin API HTTPS Port

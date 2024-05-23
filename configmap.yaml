@@ -1,0 +1,14 @@
+#configmap.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: kong-config
+data:
+  kong.conf: |
+    KONG_DATABASE=postgres
+    KONG_PG_HOST=172.16.22.122
+    KONG_PG_PORT=31005
+    KONG_PG_USER=kong
+    KONG_PG_PASSWORD=kong
+    KONG_PG_DATABASE=kong
+    KONG_PG_SCHEMA=public
