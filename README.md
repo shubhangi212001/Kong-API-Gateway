@@ -13,6 +13,6 @@ kubectl apply -f kong-deployment.yaml
 
 kubectl apply -f kong-service.yaml
 
-kubectl apply -f kong-deployment.yaml
+kubectl apply -f konga-deployment.yaml
 
-kubectl apply -f kong-service.yaml
+kubectl apply -f konga-service.yaml
